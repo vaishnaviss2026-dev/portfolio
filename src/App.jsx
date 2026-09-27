@@ -3,6 +3,12 @@ import { motion } from 'framer-motion';
 import { Play, Video, Film, Scissors, Sparkles, Mail, ArrowRight, MonitorPlay } from 'lucide-react';
 import './index.css';
 import ThinkingDots from './ThinkingDots';
+import { BlurText } from './components/BlurText';
+import { Starfield } from './components/Starfield';
+import { TiltedCard } from './components/TiltedCard';
+import { ShinyText } from './components/ShinyText';
+import { AccordionGallery } from './components/AccordionGallery';
+import { DomeGallery } from './components/DomeGallery';
 
 import heroImg from './assets/hero.png';
 
@@ -71,23 +77,25 @@ const DynamicBackground = () => {
 };
 
 const WorkCard = ({ title, category, ratio, icon }) => (
-  <motion.div 
-    whileHover={{ y: -10 }}
-    className="work-card"
-  >
-    <div className={`work-card-img ${ratio} bg-zinc-900`}>
-      <div className="absolute inset-0 flex items-center justify-center opacity-30">
-        {icon}
+  <TiltedCard className="work-card-wrapper">
+    <motion.div 
+      whileHover={{ y: -10 }}
+      className="work-card"
+    >
+      <div className={`work-card-img ${ratio} bg-zinc-900`}>
+        <div className="absolute inset-0 flex items-center justify-center opacity-30">
+          {icon}
+        </div>
+        <div className="play-button">
+          <Play fill="white" size={24} />
+        </div>
       </div>
-      <div className="play-button">
-        <Play fill="white" size={24} />
+      <div className="work-card-content">
+        <h3 className="work-card-title">{title}</h3>
+        <p className="work-card-category">{category}</p>
       </div>
-    </div>
-    <div className="work-card-content">
-      <h3 className="work-card-title">{title}</h3>
-      <p className="work-card-category">{category}</p>
-    </div>
-  </motion.div>
+    </motion.div>
+  </TiltedCard>
 );
 
 const LogoImg = ({ src, color, size = 32 }) => (
@@ -131,7 +139,7 @@ const App = () => {
   return (
     <>
       <ThinkingDots />
-      <DynamicBackground />
+      <Starfield starCount={1200} speedFactor={0.03} starColor={[227, 58, 36]} backgroundColor="#030303" />
       <nav className="navbar">
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div className="nav-logo">VS.</div>
@@ -153,9 +161,9 @@ const App = () => {
             transition={{ duration: 0.8 }}
             className="hero-content"
           >
-            <h1 className="hero-title">
-              Crafting <br />
-              <span style={{ color: 'var(--accent)' }}>Visual Stories.</span>
+            <h1 className="hero-title" style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
+              <BlurText text="Crafting" delay={0.1} />
+              <span style={{ color: 'var(--accent)' }}><BlurText text="Visual Stories." delay={0.2} /></span>
             </h1>
             <p className="hero-tagline">"I fix it in post so you don't have to."</p>
             <p className="hero-desc">
@@ -196,12 +204,14 @@ const App = () => {
           <section className="section container">
             <h2 className="section-title">Short-Form</h2>
             <p className="section-subtitle">High-retention edits for Instagram Reels and YouTube Shorts.</p>
-            <div className="grid-4">
-              <WorkCard title="Vlog Style edit" category="Reels" ratio="ratio-9-16" icon={<Scissors size={48} />} />
-              <WorkCard title="Dynamic Captions" category="TikTok" ratio="ratio-9-16" icon={<Scissors size={48} />} />
-              <WorkCard title="Gaming Highlight" category="Shorts" ratio="ratio-9-16" icon={<Play size={48} />} />
-              <WorkCard title="Product Showcase" category="Reels" ratio="ratio-9-16" icon={<Scissors size={48} />} />
-            </div>
+            <DomeGallery 
+              items={[
+                { title: 'Vlog Style edit', category: 'Reels', color: '#331122', videoSrc: 'https://www.w3schools.com/html/mov_bbb.mp4' },
+                { title: 'Dynamic Captions', category: 'TikTok', color: '#112233', videoSrc: 'https://www.w3schools.com/html/mov_bbb.mp4' },
+                { title: 'Gaming Highlight', category: 'Shorts', color: '#223311', videoSrc: 'https://www.w3schools.com/html/mov_bbb.mp4' },
+                { title: 'Product Showcase', category: 'Reels', color: '#333311', videoSrc: 'https://www.w3schools.com/html/mov_bbb.mp4' }
+              ]} 
+            />
           </section>
 
           <section className="section container">
@@ -218,11 +228,13 @@ const App = () => {
           <section className="section container">
             <h2 className="section-title">AI Creative Work</h2>
             <p className="section-subtitle">Exploring the boundaries of AI generation and enhancement.</p>
-            <div className="grid-3">
-              <WorkCard title="Surreal Landscapes" category="AI Generation" ratio="ratio-1-1" icon={<Sparkles size={48} />} />
-              <WorkCard title="Avatar Animation" category="AI Video" ratio="ratio-1-1" icon={<Sparkles size={48} />} />
-              <WorkCard title="Upscaled Classics" category="AI Enhancement" ratio="ratio-1-1" icon={<Sparkles size={48} />} />
-            </div>
+            <AccordionGallery 
+              items={[
+                { title: 'Surreal Landscapes', category: 'AI Generation', color: '#1a1025', icon: <Sparkles size={48} color="#fff" /> },
+                { title: 'Avatar Animation', category: 'AI Video', color: '#10251a', icon: <Sparkles size={48} color="#fff" /> },
+                { title: 'Upscaled Classics', category: 'AI Enhancement', color: '#251a10', icon: <Sparkles size={48} color="#fff" /> }
+              ]} 
+            />
           </section>
         </div>
 
@@ -233,7 +245,7 @@ const App = () => {
           </p>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', flexWrap: 'wrap' }}>
             <button className="contact-btn">
-              <Mail size={20} /> Book a Call
+              <Mail size={20} /> <ShinyText text="Book a Call" speed={2.5} />
             </button>
           </div>
           <p style={{ marginTop: '2rem', color: 'var(--text-secondary)' }}>
