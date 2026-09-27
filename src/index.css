@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+
+:root {
+  --bg-color: #050505;
+  --text-primary: #f0f0f0;
+  --text-secondary: #888888;
+  --accent: #E33A24; /* A cinematic red accent */
+  --card-bg: #111111;
+  --border-color: #222222;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Base styles for a cinematic feel */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin-top: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
+
+.section {
+  padding: 6rem 0;
+}
+
+.section-title {
+  font-size: 3rem;
+  margin-bottom: 3rem;
+  text-align: center;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Spotlight Card adjustments */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.video-card {
+  height: 250px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.video-card:hover {
+  transform: translateY(-5px);
+}
+
+.video-card-long {
+  aspect-ratio: 16 / 9;
+  height: auto;
+}
+
+.video-card-short {
+  aspect-ratio: 9 / 16;
+  height: auto;
+}
+
+.video-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  z-index: 2;
+}
+
+.video-card p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  z-index: 2;
+}
+
+/* Background overlay for cards to ensure text readability if there's an image */
+.video-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  z-index: 1;
+}
+
+.contact-section {
+  text-align: center;
+  background: #0a0a0a;
+  padding: 8rem 0;
+  border-top: 1px solid var(--border-color);
+}
+
+.contact-btn {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 1rem 3rem;
+  background: transparent;
+  color: var(--text-primary);
+  border: 2px solid var(--accent);
+  border-radius: 30px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.contact-btn:hover {
+  background: var(--accent);
+  box-shadow: 0 0 20px rgba(227, 58, 36, 0.4);
+}
