@@ -241,6 +241,17 @@ const App = () => {
           </p>
         </section>
       </main>
+
+      {/* WhatsApp Floating Button */}
+      <a 
+        href="https://wa.me/" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="whatsapp-float"
+        aria-label="Chat on WhatsApp"
+      >
+        <LogoImg src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/whatsapp.svg" color="#25D366" size={32} />
+      </a>
     </>
   );
 };
