@@ -5,7 +5,7 @@ export const AccordionGallery = ({ items, className = '' }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <div className={`accordion-gallery ${className}`} style={{ display: 'flex', gap: '1rem', width: '100%', height: '400px' }}>
+    <div className={`accordion-gallery ${className}`}>
       {items.map((item, index) => {
         const isActive = activeIndex === index;
         return (

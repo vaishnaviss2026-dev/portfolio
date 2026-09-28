@@ -9,6 +9,8 @@ import { TiltedCard } from './components/TiltedCard';
 import { ShinyText } from './components/ShinyText';
 import { AccordionGallery } from './components/AccordionGallery';
 import { DomeGallery } from './components/DomeGallery';
+import { ReactLenis } from 'lenis/react';
+import Orb from './components/Orb';
 
 import heroImg from './assets/hero.png';
 
@@ -137,9 +139,10 @@ const App = () => {
   ];
 
   return (
-    <>
-      <ThinkingDots />
-      <Starfield starCount={1200} speedFactor={0.03} starColor={[227, 58, 36]} backgroundColor="#030303" />
+    <ReactLenis root>
+      <>
+        <ThinkingDots />
+        <Starfield starCount={600} speedFactor={0.03} starColor={[227, 58, 36]} backgroundColor="#030303" />
       <nav className="navbar">
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div className="nav-logo">VS.</div>
@@ -165,13 +168,31 @@ const App = () => {
               <BlurText text="Crafting" delay={0.1} />
               <span style={{ color: 'var(--accent)' }}><BlurText text="Visual Stories." delay={0.2} /></span>
             </h1>
-            <p className="hero-tagline">"I fix it in post so you don't have to."</p>
-            <p className="hero-desc">
+            <motion.p 
+              className="hero-tagline"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              "I fix it in post so you don't have to."
+            </motion.p>
+            <motion.p 
+              className="hero-desc"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
               Hi, I'm Vaishnavi Shrivastava. I'm a video editor and creative professional specializing in motion graphics, short-form and long-form content, and AI-powered visuals. Let's make something amazing together.
-            </p>
-            <button className="contact-btn" onClick={() => scrollTo('work')}>
+            </motion.p>
+            <motion.button 
+              className="contact-btn" 
+              onClick={() => scrollTo('work')}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+            >
               View My Work <ArrowRight size={20} />
-            </button>
+            </motion.button>
           </motion.div>
           <motion.div 
             initial={{ opacity: 0, scale: 0.9 }}
@@ -179,7 +200,12 @@ const App = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="hero-image-container"
           >
-            <img src={heroImg} alt="Vaishnavi" className="hero-image" />
+            <div className="hero-orb-container">
+              <div style={{ position: 'absolute', inset: 0 }}>
+                <Orb hoverIntensity={0.5} rotateOnHover={true} hue={0} forceHoverState={false} />
+              </div>
+              <img src={heroImg} alt="Vaishnavi" className="hero-image" style={{ position: 'relative', zIndex: 10 }} />
+            </div>
           </motion.div>
         </section>
 
@@ -264,7 +290,8 @@ const App = () => {
       >
         <LogoImg src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/whatsapp.svg" color="#25D366" size={32} />
       </a>
-    </>
+      </>
+    </ReactLenis>
   );
 };
 
